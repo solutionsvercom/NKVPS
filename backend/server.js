@@ -1,0 +1,34 @@
+import './load-env.js';
+import express from 'express';
+import cors from 'cors';
+import { connectDB, disconnectDB } from './server/config/db.js';
+import routes from './server/routes/index.js';
+import { errorHandler } from './server/middleware/errorHandler.js';
+
+const app = express();
+const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+
+app.use(cors({ origin: clientUrl, credentials: true }));
+app.use(express.json({ limit: '1mb' }));
+
+app.use('/api', routes);
+
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+const shutdown = async () => {
+  await disconnectDB();
+  process.exit(0);
+};
+process.once('SIGINT', shutdown);
+process.once('SIGTERM', shutdown);
+
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`));
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
