@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, BadgeCheck, Building2 } from 'lucide-react';
 
 const fadeUp = (delay = 0) => ({
   initial: { y: 28 },
@@ -23,10 +23,27 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ x: -24 }} animate={{ x: 0 }} transition={{ duration: 0.65 }}>
             <p className="text-sm font-medium text-[#4A90E2] uppercase tracking-wider mb-4">About Navjyoti Kids Villa School</p>
-            <h1 className="text-5xl font-light text-[#333333] leading-tight mb-6">
+            <h1 className="text-5xl font-light text-[#333333] leading-tight mb-4">
               Educating Hearts<br />
               <span className="font-semibold">Since 2008</span>
             </h1>
+            <div className="mb-6 inline-block rounded-2xl p-px bg-gradient-to-r from-[#4A90E2] via-[#6BA3F0] to-[#4A90E2] shadow-lg shadow-[#4A90E2]/20">
+              <div
+                className="flex items-center gap-3 rounded-[15px] bg-white px-4 py-3 sm:px-5 sm:py-3.5"
+                role="note"
+                aria-label="Corporate Identity Number"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#4A90E2]/10">
+                  <BadgeCheck className="h-5 w-5 text-[#4A90E2]" aria-hidden />
+                </span>
+                <div className="min-w-0 text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4A90E2] sm:text-xs">CIN</p>
+                  <p className="font-mono text-xs font-semibold tracking-tight text-[#333333] sm:text-sm">
+                    U85500DL2024NPL428816
+                  </p>
+                </div>
+              </div>
+            </div>
             <p className="text-gray-500 leading-relaxed mb-6">
               Founded with the belief that every child deserves the best possible start, Navjyoti Kids Villa School has grown into one of the region&apos;s most trusted early childhood education centres — nurturing over 500 young learners each year.
             </p>
@@ -34,9 +51,29 @@ export default function About() {
               Our team of passionate educators, our thoughtfully designed spaces, and our warm community create an environment where children don't just learn — they thrive.
             </p>
           </motion.div>
-          <motion.div initial={{ x: 24 }} animate={{ x: 0 }} transition={{ duration: 0.65, delay: 0.15 }}>
+          <motion.div
+            initial={{ x: 24 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.65, delay: 0.15 }}
+            className="flex flex-col"
+          >
             <div className="rounded-3xl overflow-hidden shadow-2xl bg-gray-100">
               <img src="https://res.cloudinary.com/dmuoamdsu/image/upload/v1776678295/ChatGPT_Image_Apr_20_2026_03_12_53_PM_uad2r9.png" alt="About" className="w-full h-[420px] object-cover" loading="lazy" decoding="async" />
+            </div>
+            <div className="mt-5 inline-block w-full max-w-md rounded-2xl p-px bg-gradient-to-r from-[#4A90E2] via-[#6BA3F0] to-[#4A90E2] shadow-lg shadow-[#4A90E2]/20 self-start">
+              <div
+                className="flex items-center gap-3 rounded-[15px] bg-white px-4 py-3 sm:px-5 sm:py-3.5"
+                role="note"
+                aria-label="School branches"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#4A90E2]/10">
+                  <Building2 className="h-5 w-5 text-[#4A90E2]" aria-hidden />
+                </span>
+                <div className="min-w-0 text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4A90E2] sm:text-xs">Branches</p>
+                  <p className="text-sm font-semibold tracking-tight text-[#333333] sm:text-base">Over three branches</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

@@ -86,7 +86,10 @@ export default function Footer() {
               {[
                 { Icon: Phone, text: '9953240430, 9718977004' },
                 { Icon: Mail, text: 'hello@navjyotikidsvilla.edu' },
-                { Icon: MapPin, text: '302, Block A, Phase-1, Chattarpur Enclave, New Delhi-110074' },
+                {
+                  Icon: MapPin,
+                  text: 'Flat No. 6, KH. No. 619/4, village Chhatarpur, Sanjay Colony Bhati Mines, South West Delhi, Delhi - 110074',
+                },
               ].map(({ Icon, text }, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <Icon className="w-4 h-4 mt-0.5 text-[#FFD93D] flex-shrink-0" />

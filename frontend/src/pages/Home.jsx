@@ -22,9 +22,9 @@ const programs = [
 ];
 
 const stats = [
-  { value: '500+', label: 'Happy Students' },
-  { value: '50+', label: 'Dedicated Educators' },
-  { value: '15+', label: 'Years of Excellence' },
+  { value: '250+', label: 'Happy Students' },
+  { value: '25+', label: 'Dedicated Educators' },
+  { value: '18+', label: 'Years of Excellence' },
   { value: '98%', label: 'Parent Satisfaction' },
 ];
 
@@ -162,7 +162,7 @@ export default function Home() {
               </div>
               <div className="absolute -bottom-4 left-4 right-4 bg-[#4A90E2] rounded-2xl px-5 py-3 flex items-center gap-3 shadow-xl">
                 <CheckCircle className="w-5 h-5 text-white flex-shrink-0" />
-                <p className="text-white text-sm font-medium">CBSE Affiliated · Certified Excellence in Early Education</p>
+                <p className="text-white text-sm font-medium">Registered School · Certified Excellence in Early Education</p>
               </div>
             </div>
           </motion.div>
@@ -252,7 +252,7 @@ export default function Home() {
               <img src="https://res.cloudinary.com/dmuoamdsu/image/upload/v1776674588/IMG_20260417_103149_cmivtm.jpg" alt="Facilities" className="w-full h-[500px] object-cover" loading="lazy" decoding="async" />
             </div>
             <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl p-5 shadow-xl border border-gray-100">
-              <p className="text-2xl font-bold text-[#333333]">4.9 / 5</p>
+              <p className="text-2xl font-bold text-[#333333]">4.8 / 5</p>
               <p className="text-xs text-gray-500 mt-0.5">Average parent rating</p>
             </div>
           </motion.div>

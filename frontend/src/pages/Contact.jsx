@@ -11,10 +11,16 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.55, delay },
 });
 
+const schoolAddress =
+  'Flat No. 6, KH. No. 619/4, village Chhatarpur, Sanjay Colony Bhati Mines, South West Delhi, Delhi - 110074';
+const schoolMapsUrl = 'https://maps.app.goo.gl/7kbt9wd2nEtFaKHt5';
+/** Classic embed (no API key). Replace with Share → “Embed a map” HTML src if Google changes this. */
+const schoolMapsEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(schoolAddress)}&z=16&output=embed`;
+
 const contactInfo = [
   { icon: Phone, label: 'Phone', value: '9953240430, 9718977004', sub: 'Mon–Sat, 8:00 AM – 5:00 PM' },
   { icon: Mail, label: 'Email', value: 'hello@navjyotikidsvilla.edu', sub: 'We reply within 24 hours' },
-  { icon: MapPin, label: 'Address', value: '302, Block A, Phase-1, Chattarpur Enclave, New Delhi-110074', sub: 'New Delhi - 110074' },
+  { icon: MapPin, label: 'Address', value: schoolAddress, sub: 'South West Delhi · 110074' },
   { icon: Clock, label: 'School Hours', value: '8:30 AM – 1:30 PM', sub: 'Extended care until 4:00 PM' },
 ];
 
@@ -161,20 +167,23 @@ export default function Contact() {
             </motion.div>
 
             <motion.div {...fadeUp(0.2)} className="space-y-6">
-              <div className="bg-white rounded-2xl h-64 flex items-center justify-center shadow-sm border border-[#E6F9F0]">
-                <div className="text-center">
-                  <MapPin className="w-10 h-10 text-[#4A90E2] mx-auto mb-3" />
-                  <p className="font-medium text-[#333333]">302, Block A, Phase-1, Chattarpur Enclave</p>
-                  <p className="text-sm text-gray-500">New Delhi-110074</p>
-                  <a
-                    href="https://maps.google.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm text-[#4A90E2] font-medium mt-3 hover:underline"
-                  >
-                    View on Google Maps
-                  </a>
-                </div>
+              <div className="relative h-72 overflow-hidden rounded-2xl border border-[#E6F9F0] bg-[#e8e6e1] shadow-sm">
+                <iframe
+                  title="School location on Google Maps"
+                  className="absolute inset-0 h-full w-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={schoolMapsEmbedSrc}
+                />
+                <a
+                  href={schoolMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-2 text-xs font-semibold text-[#4A90E2] shadow-md ring-1 ring-black/5 transition hover:bg-white"
+                >
+                  <MapPin className="h-3.5 w-3.5" aria-hidden />
+                  Open in Google Maps
+                </a>
               </div>
               <div className="bg-[#FF4D4D] rounded-2xl p-7 text-white">
                 <h4 className="font-semibold mb-4 text-white">Visit Us</h4>

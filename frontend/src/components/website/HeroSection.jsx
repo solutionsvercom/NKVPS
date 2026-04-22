@@ -55,9 +55,9 @@ export default function HeroSection() {
 
             <div className="flex items-center gap-8 mt-10">
               {[
-                { num: '500+', label: 'Happy Students' },
-                { num: '50+', label: 'Expert Teachers' },
-                { num: '15+', label: 'Years of Trust' },
+                { num: '250+', label: 'Happy Students' },
+                { num: '25+', label: 'Expert Teachers' },
+                { num: '18+', label: 'Years of Trust' },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <p className="text-2xl font-bold text-[#FF8A5B]">{stat.num}</p>
