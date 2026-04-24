@@ -66,6 +66,21 @@ This repo is now prepared for Hostinger deployment:
 - Frontend API fallback uses relative `/api` in production.
 - Backend CORS supports one or more origins via `CLIENT_URL` (comma-separated).
 
+### Deploy as two apps (recommended by Hostinger)
+
+1. **Frontend app**
+   - Project path: `frontend/`
+   - Build command: `npm run build`
+   - Output folder: `dist`
+   - Domain: `https://www.navjyotikidsvillaschool.in` (or apex)
+
+2. **Backend app**
+   - Project path: `backend/`
+   - Entry file: `server.js`
+   - Domain: `https://api.navjyotikidsvillaschool.in`
+
+If main domain points to backend, React pages will 404. Main domain must point to frontend app.
+
 ### 1) Deploy backend (Node.js app)
 
 Use Hostinger Node.js setup for the `backend/` app.
@@ -96,6 +111,9 @@ npm run build
 ```
 
 Upload/publish `frontend/dist` to Hostinger public web root (`public_html`), or configure Hostinger build pipeline to publish the `dist` folder.
+Set frontend env for production API:
+
+`VITE_API_URL=https://api.navjyotikidsvillaschool.in/api`
 
 ### 3) SPA refresh fix (.htaccess)
 
