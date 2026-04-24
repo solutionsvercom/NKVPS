@@ -6,9 +6,22 @@ import routes from './server/routes/index.js';
 import { errorHandler } from './server/middleware/errorHandler.js';
 
 const app = express();
-const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
-app.use(cors({ origin: clientUrl, credentials: true }));
+app.use(
+  cors({
+    origin(origin, callback) {
+      // Allow browser-less requests and same-origin server calls.
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
+    credentials: true,
+  }),
+);
 app.use(express.json({ limit: '1mb' }));
 
 app.use('/api', routes);

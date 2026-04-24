@@ -58,3 +58,71 @@ npm run preview
 ```
 
 Set `VITE_API_URL` to your deployed API URL if it is on another origin.
+
+## Hostinger Deployment (No Vercel)
+
+This repo is now prepared for Hostinger deployment:
+- Vercel config removed (`frontend/vercel.json` deleted).
+- Frontend API fallback uses relative `/api` in production.
+- Backend CORS supports one or more origins via `CLIENT_URL` (comma-separated).
+
+### 1) Deploy backend (Node.js app)
+
+Use Hostinger Node.js setup for the `backend/` app.
+
+Required environment variables (panel):
+- `PORT` (provided by Hostinger or set by app runtime)
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `JWT_EXPIRES_IN=7d`
+- `CLIENT_URL=https://www.navjyotikidsvillaschool.in`
+
+If you use both apex + www, set:
+- `CLIENT_URL=https://www.navjyotikidsvillaschool.in,https://navjyotikidsvillaschool.in`
+
+Install/start:
+```bash
+cd backend
+npm install
+npm run start
+```
+
+### 2) Build frontend
+
+```bash
+cd frontend
+npm install
+npm run build
+```
+
+Upload/publish `frontend/dist` to Hostinger public web root (`public_html`), or configure Hostinger build pipeline to publish the `dist` folder.
+
+### 3) SPA refresh fix (.htaccess)
+
+For React Router routes like `/Home`, create `public_html/.htaccess`:
+
+```apacheconf
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+```
+
+### 4) API routing on Hostinger
+
+Choose one of these:
+- **Subdomain API (recommended):** host backend at `api.navjyotikidsvillaschool.in`, set `VITE_API_URL=https://api.navjyotikidsvillaschool.in/api` during frontend build.
+- **Same domain `/api`:** reverse-proxy `/api` from main domain to Node backend in Hostinger panel/web server config.
+
+If you use the subdomain approach, add `VITE_API_URL` before running `npm run build`:
+```bash
+# Linux/macOS
+VITE_API_URL=https://api.navjyotikidsvillaschool.in/api npm run build
+```
+
+```powershell
+# Windows PowerShell
+$env:VITE_API_URL="https://api.navjyotikidsvillaschool.in/api"; npm run build
+```
