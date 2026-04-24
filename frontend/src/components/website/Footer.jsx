@@ -88,7 +88,7 @@ export default function Footer() {
                 { Icon: Mail, text: 'hello@navjyotikidsvilla.edu' },
                 {
                   Icon: MapPin,
-                  text: 'Flat No. 6, KH. No. 619/4, village Chhatarpur, Sanjay Colony Bhati Mines, South West Delhi, Delhi - 110074',
+                  text: 'House No 315, Block A, Gali no 6, Chhatarpur Enclave Phase 1, South Delhi, Delhi-110074',
                 },
               ].map(({ Icon, text }, i) => (
                 <div key={i} className="flex items-start gap-3">

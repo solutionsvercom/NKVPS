@@ -12,7 +12,7 @@ const fadeUp = (delay = 0) => ({
 });
 
 const schoolAddress =
-  'Flat No. 6, KH. No. 619/4, village Chhatarpur, Sanjay Colony Bhati Mines, South West Delhi, Delhi - 110074';
+  'House No 315, Block A, Gali no 6, Chhatarpur Enclave Phase 1, South Delhi, Delhi-110074';
 const schoolMapsUrl = 'https://maps.app.goo.gl/7kbt9wd2nEtFaKHt5';
 /** Classic embed (no API key). Replace with Share → “Embed a map” HTML src if Google changes this. */
 const schoolMapsEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(schoolAddress)}&z=16&output=embed`;
