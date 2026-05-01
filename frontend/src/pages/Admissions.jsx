@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowRight, FileText, Calendar, Users, GraduationCap } from 'lucide-react';
 import { admissionsApi } from '@/services/api';
@@ -31,6 +31,13 @@ export default function Admissions() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const resultRef = useRef(null);
+
+  useEffect(() => {
+    if (submitted && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [submitted]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -105,7 +112,12 @@ export default function Admissions() {
           </motion.div>
 
           {submitted ? (
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl p-12 text-center shadow-sm border border-[#EAF4FF]">
+            <motion.div
+              ref={resultRef}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white rounded-2xl p-12 text-center shadow-sm border border-[#EAF4FF]"
+            >
               <div className="w-16 h-16 bg-[#4A90E2] rounded-full flex items-center justify-center mx-auto mb-5">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>

@@ -15,7 +15,7 @@ export const createContact = asyncHandler(async (req, res) => {
   const payload = normalizeContactBody(req.body);
   const row = await ContactQuery.create(payload);
   sendContactMails(row.toObject ? row.toObject() : row).catch((err) =>
-    console.error('[mail] contact notify failed:', err.message)
+    console.error('[mail] contact notify failed:', err?.response || err?.message || err)
   );
   res.status(201).json({ ok: true, id: row._id.toString() });
 });

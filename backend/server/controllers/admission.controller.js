@@ -37,7 +37,7 @@ export const createInquiry = asyncHandler(async (req, res) => {
   const payload = normalizeInquiryPayload(req.body);
   const row = await AdmissionInquiry.create(payload);
   sendAdmissionMails(row.toObject ? row.toObject() : row).catch((err) =>
-    console.error('[mail] admission notify failed:', err.message)
+    console.error('[mail] admission notify failed:', err?.response || err?.message || err)
   );
   res.status(201).json(serialize(row));
 });

@@ -17,12 +17,24 @@ function getPassword() {
   return raw.replace(/\s+/g, '');
 }
 
+/** Trim, strip CR/LF ends, and optional wrapping quotes (some host env UIs add them). */
+function normalizeRecipientToken(s) {
+  let t = String(s).replace(/\r/g, '').trim();
+  if (
+    (t.startsWith('"') && t.endsWith('"')) ||
+    (t.startsWith("'") && t.endsWith("'"))
+  ) {
+    t = t.slice(1, -1).trim();
+  }
+  return t;
+}
+
 function notifyAddresses() {
   const raw = process.env.MAIL_NOTIFY_TO?.trim();
   if (raw) {
     return raw
       .split(',')
-      .map((s) => s.trim())
+      .map((s) => normalizeRecipientToken(s))
       .filter(Boolean);
   }
   const fallback = process.env.SMTP_USER?.trim();
@@ -77,6 +89,9 @@ async function sendMessage({ to, subject, text, html, replyTo }) {
     html: html || `<pre style="font-family:sans-serif;white-space:pre-wrap">${escapeHtml(text)}</pre>`,
     ...(replyTo ? { replyTo } : {}),
   });
+  if (process.env.MAIL_DEBUG === 'true' || process.env.MAIL_DEBUG === '1') {
+    console.log('[mail] sent ok →', to.join(', '), '|', subject);
+  }
   return { sent: true };
 }
 
@@ -244,4 +259,19 @@ export async function sendContactMails(query) {
 
 export function isMailConfigured() {
   return smtpConfigured();
+}
+
+/** One-line summary for server startup (no secrets). */
+export function logMailStartup() {
+  if (!smtpConfigured()) {
+    console.warn('[mail] SMTP not set — contact/admission notify emails are skipped.');
+    return;
+  }
+  const staff = notifyAddresses();
+  const line =
+    (staff.length ? staff.join(', ') : '(none)') +
+    (process.env.MAIL_NOTIFY_TO?.trim()
+      ? ''
+      : ' (MAIL_NOTIFY_TO unset; using SMTP_USER as fallback)');
+  console.log('[mail] Staff notifications →', line);
 }
